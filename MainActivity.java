@@ -1,36 +1,62 @@
-package com.example.loginapplication;
+package com.example.activitylifecycle;
 import android.os.Bundle;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import android.widget.EditText;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import android.widget.Toast;
-import android.view.View;
 public class MainActivity extends AppCompatActivity {
-    private EditText unameEditText;
-    private EditText passEditText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        unameEditText = findViewById(R.id.uname1);
-        passEditText = findViewById(R.id.pass1);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+        Toast toast1 = Toast.makeText(getApplicationContext(), "onCreate Called",
+                Toast.LENGTH_LONG);
+        toast1.show();
     }
-    public void Login(View view) {
-        String username = unameEditText.getText().toString();
-        String password = passEditText.getText().toString();
-        if (isValidCredentials(username,password))
-        {
-            Toast.makeText(this,"login Successful",Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
-            Toast.makeText(this,"invalid credentials",Toast.LENGTH_SHORT).show();
-        }
+    protected void onStart() {
+        super.onStart();
+        Toast toast1 = Toast.makeText(getApplicationContext(), "onStart Called",
+                Toast.LENGTH_LONG);
+        toast1.show();
     }
-    private boolean isValidCredentials(String username,String password)
-    {
-        return username.equals("Admin") && password.equals("1234");
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Toast toast1 = Toast.makeText(getApplicationContext(), "onRestart Called",
+                Toast.LENGTH_LONG);
+        toast1.show();
+    }
+    protected void onPause() {
+        super.onPause();
+        Toast toast1 = Toast.makeText(getApplicationContext(), "onPause Called",
+                Toast.LENGTH_LONG);
+
+        toast1.show();
+    }
+    protected void onResume() {
+        super.onResume();
+        Toast toast1 = Toast.makeText(getApplicationContext(), "onResume Called",
+                Toast.LENGTH_LONG);
+        toast1.show();
+    }
+    protected void onStop() {
+        super.onStop();
+        Toast toast1 = Toast.makeText(getApplicationContext(), "onStop Called",
+                Toast.LENGTH_LONG);
+        toast1.show();
+    }
+    protected void onDestroy() {
+        super.onDestroy();
+        Toast toast1 = Toast.makeText(getApplicationContext(), "onDestroy Called",
+                Toast.LENGTH_LONG);
+        toast1.show();
     }
 }
