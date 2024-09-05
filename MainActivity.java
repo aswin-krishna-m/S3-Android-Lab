@@ -1,62 +1,85 @@
-package com.example.activitylifecycle;
-import android.os.Bundle;
-import androidx.activity.EdgeToEdge;
+package com.example.calculator;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import android.widget.Toast;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
-    @Override
+    EditText ed1,ed2;
+    TextView tv1;
+    double num1,num2;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-        Toast toast1 = Toast.makeText(getApplicationContext(), "onCreate Called",
-                Toast.LENGTH_LONG);
-        toast1.show();
+        ed1 = findViewById(R.id.ed1);
+        ed2 = findViewById(R.id.ed2);
+        tv1= findViewById(R.id.tv1);
     }
-    protected void onStart() {
-        super.onStart();
-        Toast toast1 = Toast.makeText(getApplicationContext(), "onStart Called",
-                Toast.LENGTH_LONG);
-        toast1.show();
+    public void Clear(View view) {
+        ed1.setText("");
+        ed2.setText("");
+        tv1.setText("");
     }
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Toast toast1 = Toast.makeText(getApplicationContext(), "onRestart Called",
-                Toast.LENGTH_LONG);
-        toast1.show();
-    }
-    protected void onPause() {
-        super.onPause();
-        Toast toast1 = Toast.makeText(getApplicationContext(), "onPause Called",
-                Toast.LENGTH_LONG);
+    public void Add(View view) {
+        String num1str = ed1.getText().toString();
+        String num2str = ed2.getText().toString();
+        if (!num1str.isEmpty() && !num2str.isEmpty()) {
+            double num1 = Double.parseDouble(num1str);
+            double num2 = Double.parseDouble(num2str);
+            double result = num1 + num2;
+            tv1.setText(String.valueOf(result));
+        }
 
-        toast1.show();
+        else
+        {
+            tv1.setText("Result: Invalid input");
+        }
     }
-    protected void onResume() {
-        super.onResume();
-        Toast toast1 = Toast.makeText(getApplicationContext(), "onResume Called",
-                Toast.LENGTH_LONG);
-        toast1.show();
+    public void Sub(View view) {
+        String num1str = ed1.getText().toString();
+        String num2str = ed2.getText().toString();
+        if (!num1str.isEmpty() && !num2str.isEmpty()) {
+            double num1 = Double.parseDouble(num1str);
+            double num2 = Double.parseDouble(num2str);
+            double result = num1 - num2;
+            tv1.setText(String.valueOf(result));
+        }
+        else
+        {
+            tv1.setText("Result: Invalid input");
+        }
     }
-    protected void onStop() {
-        super.onStop();
-        Toast toast1 = Toast.makeText(getApplicationContext(), "onStop Called",
-                Toast.LENGTH_LONG);
-        toast1.show();
+    public void Mul(View view) {
+        String num1str = ed1.getText().toString();
+        String num2str = ed2.getText().toString();
+        if (!num1str.isEmpty() && !num2str.isEmpty())
+        {
+            double num1 = Double.parseDouble(num1str);
+            double num2 = Double.parseDouble(num2str);
+            double result = num1 * num2;
+            tv1.setText(String.valueOf(result));
+        }
+        else
+        {
+            tv1.setText("Result: Invalid input");
+        }
     }
-    protected void onDestroy() {
-        super.onDestroy();
-        Toast toast1 = Toast.makeText(getApplicationContext(), "onDestroy Called",
-                Toast.LENGTH_LONG);
-        toast1.show();
-    }
-}
+    public void Div(View view) {
+        String num1str = ed1.getText().toString();
+        String num2str = ed2.getText().toString();
+        if (!num1str.isEmpty() && !num2str.isEmpty())
+        {
+            double num1 = Double.parseDouble(num1str);
+            double num2 = Double.parseDouble(num2str); if (num2 != 0) {
+            double result = num1 / num2;
+            tv1.setText(String.valueOf(result));
+        }
+        else
+        {
+            tv1.setText("Result: Division by zero");}
+        }
+        else
+        {
+            tv1.setText("Result: Invalid input");
+        }
+    }}
